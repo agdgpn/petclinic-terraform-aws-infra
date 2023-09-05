@@ -20,6 +20,15 @@ data "aws_ami" "custom_ami" {
     values = ["${var.custom_ami_value}"]
   }
 }
+/* AMI personalisé pour jenkins Agent */
+data "aws_ami" "custom_ami2" {
+  most_recent = true
+  owners      = ["${var.custom_ami_owner}"]
+  filter {
+    name = "name"
+    values = ["${var.custom_ami_value2}"]
+  }
+}
 
 ##############
 # VPC
@@ -42,7 +51,7 @@ module "certificate" {
 # Instance on the first private subnet
 resource "aws_instance" "private-ec2-1" {
   instance_type = var.instance_type2
-  ami           = data.aws_ami.ubuntu_ami.id
+  ami           = data.aws_ami.custom_ami2.id
   key_name               = "${var.key_pair_name}"
   vpc_security_group_ids = ["${module.vpc.private_sg.id}"]
   #subnet_id              = aws_subnet.private_subnet[0].id
@@ -57,7 +66,7 @@ resource "aws_instance" "private-ec2-1" {
 # Instance on the second private subnet
 resource "aws_instance" "private-ec2-2" {
   instance_type = var.instance_type2
-  ami           = data.aws_ami.ubuntu_ami.id
+  ami           = data.aws_ami.custom_ami2.id
   key_name               = "${var.key_pair_name}"
   vpc_security_group_ids = ["${module.vpc.private_sg.id}"]
   #subnet_id              = aws_subnet.private_subnet[1].id

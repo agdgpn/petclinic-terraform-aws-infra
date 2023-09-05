@@ -12,6 +12,7 @@ module "compute" {
   asg_public_ec2_name_tag   = "jenkins-controller"
   custom_ami_owner          =  "125040901676"
   custom_ami_value          =  "jenkins-controller*"
+  custom_ami_value2          =  "jenkins-agent*"
 }
 ##############
 # IAM
@@ -66,7 +67,7 @@ resource "aws_eks_node_group" "spots_node" {
   node_group_name = "${var.project}-spot-group-name"
   node_role_arn   = module.iam.nodes_role.arn
   subnet_ids      = [module.compute.private_subnets[0].id, module.compute.private_subnets[1].id]
-  instance_types = ["${var.node_ec2_type_3}"]
+  instance_types = ["${var.node_ec2_type_2}"]
   capacity_type = "SPOT"
   scaling_config {
     desired_size = var.spot_node_desired_size

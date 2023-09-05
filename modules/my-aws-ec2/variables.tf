@@ -44,3 +44,8 @@ variable "custom_ami_value" {
   default = "ubuntu/images/hvm-ssd/ubuntu-jammy-22.04-amd64-server-20230516"
 }
 
+#Custom AMI value2
+variable "custom_ami_value2" {
+  default = "ubuntu/images/hvm-ssd/ubuntu-jammy-22.04-amd64-server-20230516"
+}
+

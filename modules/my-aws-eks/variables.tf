@@ -38,15 +38,15 @@ variable "node_max_size" {
 variable "spot_node_desired_size" {
   description = "Node desired size"
   type        = number
-  default     = 1
+  default     = 2
 }
 variable "spot_node_min_size" {
   description = "Node max size"
   type        = number
-  default     = 1
+  default     = 0
 }
 variable "spot_node_max_size" {
   description = "Node max size"
   type        = number
-  default     = 1
+  default     = 2
 }
